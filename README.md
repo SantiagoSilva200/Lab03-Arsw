@@ -11,6 +11,7 @@ lo que provoca un uso excesivo de los recursos de la CPU. Esto se conoce como 鈥
 ![1](img/1.png)
 
 ![1](img/2.png)
+
 El programa se ejecut贸 durante 2 minutos y 35 segundos, registrando un uso de CPU del 6.2%. Este porcentaje es relativamente bajo, lo que sugiere que el proceso no ha generado una carga 
 significativa en el sistema durante este tiempo. Sin embargo, si la ejecuci贸n se prolongara o si el programa utilizara m谩s hilos en estado de busy-waiting, el consumo de CPU podr铆a aumentar considerablemente.
 
@@ -90,9 +91,7 @@ Y en ControlFrame, simplemente hacemos los llamados a estos metodos de la clase 
 5. Verifique nuevamente el funcionamiento (haga clic muchas veces en el bot贸n). Se cumple o no el invariante?.
 
 ![1](img/6.png)
-![1](img/7.png)
-![1](img/8.png)
-![1](img/9.png)
+
 
 No, sigue sin cumplirse el invariante despues de las implementaciones anteiores. 
 
@@ -129,9 +128,17 @@ Esto con el fin de evitar las condiciones de carrera al modificar la salud de lo
 Gracias a esto, ahora si se cumple el invariante:
 
 
+![1](img/7.png)
+
+![1](img/8.png)
+
+![1](img/9.png)
+
+
 7. Tras implementar su estrategia, ponga a correr su programa, y ponga atenci贸n a si 茅ste se llega a detener. Si es as铆, use los programas jps y jstack para identificar por qu茅 el programa se detuvo.
 
 ![1](img/10.png)
+
 ![1](img/11.png)
 
 Tras hacer la implementacion anterior, usamos el comando "jps" e identificamos el numero que representaba el programa del codigo (ControlFrame), ejecutamos jstack, para ver los deadlock o problemas de la 
@@ -143,9 +150,11 @@ y tampoco encontramos ningun error de deadlock.
 Si en estos casos grandes se empieza a incumplir de nuevo el invariante, debe analizar lo realizado en el paso 4.
 
 Con 100:
+
 ![1](img/12.png)
 
 Invariante tras 3 pruebas:
+
 ![1](img/13.png)
 ![1](img/14.png)
 ![1](img/15.png)
@@ -153,17 +162,21 @@ Invariante tras 3 pruebas:
 Si se cumple 
 
 Con 1000:
+
 ![1](img/16.png)
 
 Invariante tras 3 pruebas:
+
 ![1](img/17.png)
 ![1](img/18.png)
 ![1](img/19.png)
 
 Con 10000:
+
 ![1](img/20.png)
 
 Invariante tras 3 pruebas:
+
 ![1](img/21.png)
 ![1](img/21.png)
 ![1](img/22.png)
