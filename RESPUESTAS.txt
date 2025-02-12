@@ -1,0 +1,13 @@
+Solucion punto 10.
+
+Debido a que el problema nos sugiere suprimir a los inmortales muertos, debemos cambiar la lista que 
+comparten los inmortales (immortalsPopulation), cuando queremos modificar esta lista, varios hilos 
+acceden a ella y ahi se genera una condicion de carrera. 
+
+Para solucionar esto, cambiamos de estructura, pasamos de un arreglo de immortales y la cambiamos a 
+"CopyOnWriteArrayList", que investigando un poco, es una estructura permite modificar la lista sin generar 
+"ConcurrentModificationException", ya que las operaciones de lectura no bloquean la escritura.
+
+Ademas, eliminamos la sincronizacion en los metodos de run() y fight() ya que "CopyOnWriteArrayList"
+maneja las modificaciones sin bloquear la lectura de los elementos. Solo hay sincronizacion en 
+como se maneja al acceso a la lista de innmortales durante el combate. 
