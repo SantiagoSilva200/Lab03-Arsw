@@ -130,6 +130,10 @@ y tampoco encontramos ningun error de deadlock.
 9. Una vez corregido el problema, rectifique que el programa siga funcionando de manera consistente cuando se ejecutan 100, 1000 o 10000 inmortales. 
 Si en estos casos grandes se empieza a incumplir de nuevo el invariante, debe analizar lo realizado en el paso 4.
 
+
+Para 100,1000 y 10000 el programa sigue siendo consistente (aunque cuando probamos con 10000, el programa se demoro en empezar, sin emabargo, cuando se ejecutaban las peleas, fue consistente). Tambien el 
+invariante seguia funcionando para todos los casos. 
+
 11. Para finalizar, implemente la opción STOP.
 
 Cuando se presiona el boton STOP, ahora detiene la simulacion y permite iniciar de nuevo. 
@@ -142,16 +146,5 @@ btnStop.addActionListener(new ActionListener() {
             }
         });
 ```
-
-
-
-
-
-
-
-
-
-Para 100,1000 y 10000 el programa sigue siendo consistente (aunque cuando probamos con 10000, el programa se demoro en empezar, sin emabargo, cuando se ejecutaban las peleas, fue consistente). Tambien el 
-invariante seguia funcionando para todos los casos. 
 
 
