@@ -8,10 +8,13 @@ El elevado consumo de CPU en este programa se debe principalmente a la implement
 la presencia de elementos en la cola para su procesamiento. Sin embargo, debido a la ausencia de un mecanismo de sincronización o espera, el hilo del consumidor permanece en ejecución continua, 
 lo que provoca un uso excesivo de los recursos de la CPU. Esto se conoce como “busy-waiting” (ocurre cuando un hilo consume ciclos de CPU innecesariamente mientras espera la llegada de nuevos elementos a la cola).
 
+![1](img/1.png)
 
-
+![1](img/2.png)
 El programa se ejecutó durante 2 minutos y 35 segundos, registrando un uso de CPU del 6.2%. Este porcentaje es relativamente bajo, lo que sugiere que el proceso no ha generado una carga 
 significativa en el sistema durante este tiempo. Sin embargo, si la ejecución se prolongara o si el programa utilizara más hilos en estado de busy-waiting, el consumo de CPU podría aumentar considerablemente.
+
+
 
 
 2. Haga los ajustes necesarios para que la solución use más eficientemente la CPU, teniendo en cuenta que -por ahora- la producción es lenta y el consumo es rápido. 
@@ -28,13 +31,12 @@ Esto se hizo con el fin de evitar el "busy-waiting":
         En la versión anterior, el Consumer estaba en un bucle infinito verificando constantemente si la cola tenía elementos (if (queue.size() > 0)). Esto consumía mucha CPU innecesariamente.
         Con wait() y notify(), el Consumer entra en estado de espera y no consume CPU mientras la cola está vacía.
 
-
+![1](img/3.png)
 
 Ahora el uso del CPU disminuyo radicalmente, esto significa que la parte del código que realizaba un bucle infinito con alto uso de CPU, se optimizo correctamente recudiendo su uso. 
 
 3. Haga que ahora el productor produzca muy rápido, y el consumidor consuma lento. Teniendo en cuenta que el productor conoce un límite de Stock (cuantos elementos debería tener, a lo sumo en la cola), haga que dicho límite se respete. 
 Revise el API de la colección usada como cola para ver cómo garantizar que dicho límite no se supere. Verifique que, al poner un límite pequeño para el 'stock', no haya consumo alto de CPU ni errores.
-
 
 
 
@@ -45,7 +47,7 @@ Hicimos cambios en las clases de Producer, y StartProduction:
     Usamos notify() después de agregar un elemento para despertar al consumidor. Cambiamos Thread.sleep(1000) a Thread.sleep(100) para que el productor produzca más rápido.
     Agregamos long stockLimit = 5L; que representa el límite de stock que el productor no debe exceder al agregar elementos a la cola. 
 
-
+![1](img/4.png)
 
 ### 3 punto:
 
@@ -57,6 +59,8 @@ El valor total de los puntos de vida de todos los jugadores en el juego depende 
 la suma total de salud será igual a N * 100. Este valor se mantendrá constante a menos que se realicen cambios en los puntos de vida o en la cantidad de jugadores.
 
 3.  Ejecute la aplicación y verifique cómo funcionan las opción ‘pause and check’. Se cumple el invariante?.
+
+![1](img/5.png)
 
 No, como se menciono en el punto anterior, debido a que la sumatoria de vida de vida de todos los jugadores deberia ser N (numero de inmortales) en este caso 3, * 100, pero en este caso es 640. 
 
@@ -84,6 +88,11 @@ public static void pauseAll() {
 Y en ControlFrame, simplemente hacemos los llamados a estos metodos de la clase con Immortal.resumeAll() y Immortal.pauseAll()
 
 5. Verifique nuevamente el funcionamiento (haga clic muchas veces en el botón). Se cumple o no el invariante?.
+
+![1](img/6.png)
+![1](img/7.png)
+![1](img/8.png)
+![1](img/9.png)
 
 No, sigue sin cumplirse el invariante despues de las implementaciones anteiores. 
 
@@ -122,6 +131,9 @@ Gracias a esto, ahora si se cumple el invariante:
 
 7. Tras implementar su estrategia, ponga a correr su programa, y ponga atención a si éste se llega a detener. Si es así, use los programas jps y jstack para identificar por qué el programa se detuvo.
 
+![1](img/10.png)
+![1](img/11.png)
+
 Tras hacer la implementacion anterior, usamos el comando "jps" e identificamos el numero que representaba el programa del codigo (ControlFrame), ejecutamos jstack, para ver los deadlock o problemas de la 
 implementacion y tras realizar la lectura de lo que arrojaba el comando, no encontramos nada referenciado a deadlocks. Sin embargo, para asegurarnos, escribimos el comando "jstack -l 21864 | findstr -i deadlock"
 y tampoco encontramos ningun error de deadlock. 
@@ -129,6 +141,32 @@ y tampoco encontramos ningun error de deadlock.
 
 9. Una vez corregido el problema, rectifique que el programa siga funcionando de manera consistente cuando se ejecutan 100, 1000 o 10000 inmortales. 
 Si en estos casos grandes se empieza a incumplir de nuevo el invariante, debe analizar lo realizado en el paso 4.
+
+Con 100:
+![1](img/12.png)
+
+Invariante tras 3 pruebas:
+![1](img/13.png)
+![1](img/14.png)
+![1](img/15.png)
+
+Si se cumple 
+
+Con 1000:
+![1](img/16.png)
+
+Invariante tras 3 pruebas:
+![1](img/17.png)
+![1](img/18.png)
+![1](img/19.png)
+
+Con 10000:
+![1](img/20.png)
+
+Invariante tras 3 pruebas:
+![1](img/21.png)
+![1](img/21.png)
+![1](img/22.png)
 
 
 Para 100,1000 y 10000 el programa sigue siendo consistente (aunque cuando probamos con 10000, el programa se demoro en empezar, sin emabargo, cuando se ejecutaban las peleas, fue consistente). Tambien el 
