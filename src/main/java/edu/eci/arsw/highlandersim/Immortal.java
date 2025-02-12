@@ -12,7 +12,7 @@ public class Immortal extends Thread {
     private final List<Immortal> immortalsPopulation;
     private final String name;
     private final Random r = new Random(System.currentTimeMillis());
-    private boolean activo = true; // Nuevo estado
+    private boolean activo = true;
     private static final Object pauseLock = new Object();
     private static boolean paused = false;
 
@@ -59,7 +59,7 @@ public class Immortal extends Thread {
 
         synchronized (first) {
             synchronized (second) {
-                if (i2.estaActivo()) { // Solo pelear si está activo
+                if (i2.estaActivo()) {
                     i2.changeHealth(i2.getHealth() - defaultDamageValue);
                     this.health += defaultDamageValue;
                     updateCallback.processReport("Fight: " + this + " vs " + i2 + "\n");
