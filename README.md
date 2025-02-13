@@ -1,5 +1,9 @@
 # Lab03-Arsw
 
+## hecho por: 
+Santiago Córdoba Dueñas
+Santiago Silva Roa
+
 ### 1 punto. 
 
 1. Revise el funcionamiento del programa y ejecútelo. Mientras esto ocurren, ejecute jVisualVM y revise el consumo de CPU del proceso correspondiente. A qué se debe este consumo?, cual es la clase responsable?
